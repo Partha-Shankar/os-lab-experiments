@@ -33,3 +33,4 @@ int main() {
     for (i = 1; i <= nf; i++)
         printf("\n%d\t\t%d\t\t%d\t\t%d\t\t%d", i, f[i], ff[i], b[ff[i]], frag[i]);
 }
+
