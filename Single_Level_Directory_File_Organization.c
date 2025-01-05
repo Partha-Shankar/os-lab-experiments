@@ -26,6 +26,7 @@ void main() {
                 dir.fcnt++;
                 break;
 
+
             case 2:
                 printf("\nEnter the name of the file -- ");
                 scanf("%s", f);
