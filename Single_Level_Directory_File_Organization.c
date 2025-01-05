@@ -25,22 +25,20 @@ void main() {
                 scanf("%s", dir.fname[dir.fcnt]);
                 dir.fcnt++;
                 break;
-
-
-            case 2:
-                printf("\nEnter the name of the file -- ");
-                scanf("%s", f);
-                for (i = 0; i < dir.fcnt; i++) {
-                    if (strcmp(f, dir.fname[i]) == 0) {
-                        printf("File %s is deleted ", f);
-                        strcpy(dir.fname[i], dir.fname[dir.fcnt - 1]);
-                        break;
-                    }
-                }
-                if (i == dir.fcnt)
-                    printf("File %s not found", f);
-                else
-                    dir.fcnt--;
+                
+            case 2: 
+                printf("\nEnter the name of the file to delete -- "); 
+                scanf("%s", f); 
+                for (i = 0; i < dir.fcnt; i++) { 
+                    if (strcmp(f, dir.fname[i]) == 0) { 
+                        printf("File '%s' is deleted.\n", f); 
+                        strcpy(dir.fname[i], dir.fname[dir.fcnt - 1]); 
+                        dir.fcnt--; 
+                        break; 
+                    } 
+                } 
+                if (i == dir.fcnt) 
+                    printf("Error: File '%s' not found.\n", f); 
                 break;
 
             case 3:
