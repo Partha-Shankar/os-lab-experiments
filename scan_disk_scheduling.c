@@ -1,14 +1,6 @@
 #include <stdio.h>
 
 int request[50];
-int SIZE, pre, head;
-
-int dist(int a, int b) {
-    return (a > b) ? a - b : b - a;
-}
-#include <stdio.h>
-
-int request[50];
 int SIZE, pre, head, uptrack, downtrack;
 
 struct max {
@@ -22,7 +14,6 @@ int dist(int a, int b) {
 void sort(int n) {
     int i, j;
 
-    // Bubble sort to arrange requests in ascending order
     for (i = 0; i < n - 1; i++) {
         for (j = 0; j < n - i - 1; j++) {
             if (request[j] > request[j + 1]) {
@@ -33,7 +24,6 @@ void sort(int n) {
         }
     }
 
-    // Categorize requests into downtrack and uptrack
     j = 0;
     i = 0;
     while (request[i] != head) {
@@ -49,6 +39,36 @@ void sort(int n) {
     uptrack = j;
 }
 
+void scan(int n) {
+    int i, seekcount = 0;
+    printf("SEEK SEQUENCE = ");
+    sort(n);
+
+    if (pre < head) {
+        for (i = 0; i < uptrack; i++) {
+            printf("%d ", head);
+            seekcount += dist(head, kate[i].up);
+            head = kate[i].up;
+        }
+        for (i = downtrack - 1; i >= 0; i--) {
+            printf("%d ", head);
+            seekcount += dist(head, kate[i].down);
+            head = kate[i].down;
+        }
+    } else {
+        for (i = downtrack - 1; i >= 0; i--) {
+            printf("%d ", head);
+            seekcount += dist(head, kate[i].down);
+            head = kate[i].down;
+        }
+        for (i = 0; i < uptrack; i++) {
+            printf("%d ", head);
+            seekcount += dist(head, kate[i].up);
+            head = kate[i].up;
+        }
+    }
+    printf("\nTOTAL DISTANCE: %d\n", seekcount);
+}
 
 int main() {
     int n, i;
@@ -62,13 +82,11 @@ int main() {
 
     printf("ENTER THE CURRENT HEAD: ");
     scanf("%d", &head);
-
-    request[n] = head;          // Add the head position to the request list
-    request[n + 1] = SIZE - 1;  // Add the maximum disk position
-    request[n + 2] = 0;         // Add the minimum disk position
+    request[n] = head;
+    request[n + 1] = SIZE - 1;
+    request[n + 2] = 0;
 
     printf("ENTER THE PREVIOUS REQUEST: ");
     scanf("%d", &pre);
-
-    return 0;
+    scan(n + 3);
 }
